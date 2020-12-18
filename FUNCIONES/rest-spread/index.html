@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramater Defaults</title>
+  <link rel="stylesheet" href="../parameter-defaults/css/styles.css">
+</head>
+
+<body>
+  <main class="wrapper">
+    <h1>Icecream Machine</h1>
+    <p>Elige los 2 sabores que más te gusten y haz tu orden</p>
+    <div class="icrecream-grid">
+      <div class="flavor" data-flavor="strawberry"></div>
+      <div class="flavor" data-flavor="chocolate"></div>
+      <div class="flavor" data-flavor="orange"></div>
+      <div class="flavor" data-flavor="vanilla"></div>
+      <div class="flavor" data-flavor="lemon"></div>
+    </div>
+    <button id="btn" class="button">Preparar Helado</button>
+  </main>
+
+
+  <script>
+
+    //selector
+    //el dolar es que no son datos puros son objetos HTML
+    const $flavors = document.querySelectorAll('.flavor')
+    //  console.log($flavors)
+    //un NodeList tiene la función de forEach
+    $flavors.forEach($el => $el.addEventListener('click', selectFlavor))
+    function selectFlavor() {
+      //this solo existe en functions normales
+      this.classList.toggle('is-active')
+
+    }
+
+    window.btn.addEventListener('click', () => {
+      const $flavors = document.querySelectorAll('.flavor.is-active')
+
+      //mediante un spread se pasa de un node list a un array de verdad
+      try {
+        makeIceCream([...$flavors])
+      } catch (error) {
+        console.log(error)
+        alert('Aun no completas los sabores del helado')
+      }
+
+    })
+
+    function isRequired(param) {
+      throw new Error(`${param} el parámetro es requerido`)
+    }
+
+    //rest
+    function makeIceCream([flavor1 = isRequired('flavor1'), flavor2 = isRequired('flavor2'), ...otherFlavors]) {
+      //son nodos
+      console.log(otherFlavors.map)
+      //
+
+      //map recibe una función
+      const toppings = otherFlavors.map((e) => e.dataset.flavor)
+      console.log(toppings)
+
+
+      alert(`Tienes un rico helado de ${flavor1.dataset.flavor} y  ${flavor2.dataset.flavor} con toppings de ${toppings}`)
+    }
+  </script>
+</body>
+
+</html>

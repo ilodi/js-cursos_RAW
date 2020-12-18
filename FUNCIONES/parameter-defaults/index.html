@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramater Defaults</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <main class="wrapper">
+    <h1>Icecream Machine</h1>
+    <p>Elige los 2 sabores que más te gusten y haz tu orden</p>
+    <div class="icrecream-grid">
+      <div class="flavor" data-flavor="strawberry"></div>
+      <div class="flavor" data-flavor="chocolate"></div>
+      <div class="flavor" data-flavor="orange"></div>
+      <div class="flavor" data-flavor="vanilla"></div>
+      <div class="flavor" data-flavor="lemon"></div>
+    </div>
+    <button id="btn" class="button">Preparar Helado</button>
+  </main>
+
+
+  <script>
+
+    //selector
+    //el dolar es que no son datos puros son objetos HTML
+    const $flavors = document.querySelectorAll('.flavor')
+    //  console.log($flavors)
+    //un NodeList tiene la función de forEach
+    $flavors.forEach($el => $el.addEventListener('click', selectFlavor))
+    function selectFlavor() {
+      //this solo existe en functions normales
+      this.classList.toggle('is-active')
+
+    }
+
+    window.btn.addEventListener('click', () => {
+      const $flavors = document.querySelectorAll('.flavor.is-active')
+      console.log($flavors.length)
+      if ($flavors.length === 2) {
+        try {
+          makeIceCream($flavors[0], $flavors[1])
+        } catch (error) {
+          console.log(error)
+          alert('Aun no completas los sabores del helado')
+        }
+      } else {
+
+        $flavors.classList.toggle('is-active')
+      }
+
+    })
+
+    function isRequired(param) {
+      throw new Error(`${param} el parámetro es requerido`)
+    }
+
+    function makeIceCream(flavor1 = isRequired('flavor1'), flavor2 = isRequired('flavor2')) {
+      alert(`Tienes un rico helado de ${flavor1.dataset.flavor} y  ${flavor2.dataset.flavor}`)
+    }
+  </script>
+</body>
+
+</html>

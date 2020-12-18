@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tagged Templates </title>
+	<style>
+		body {
+			display: flex;
+			margin: 0;
+			height: 100vh;
+			justify-content: center;
+			align-items: center;
+			font-size: system-ui;
+			background: salmon;
+			color: white;
+			font-size: 2em;
+			text-shadow: 1px 1px rgba(0, 0, 0, .5);
+		}
+
+		strong {
+			color: yellow;
+			padding: 0.15em .4em;
+			background: #dfb2f4;
+			border-radius: 20px;
+			border: 2px solid #f2f5ff;
+		}
+	</style>
+</head>
+
+<body>
+	<p></p>
+	<script>
+		//Primer parámetro son los strings
+		//Segundo los value son los dinámicos
+		//RestOperation hacer un resumen de los parámetros enviados ...
+		///...Nombre que quieras
+		function taggedTemplate(strings, ...dynamicValues) {
+			//console.log(strings, dynamicValues)
+			let newContent = ''
+			strings.forEach((string, index) => {
+				//Forma tradicional de hacerlo
+				/*
+				let strong = ''
+				if (dynamicValues[index]) {
+						strong = `<strong>${dynamicValues[index]}</strong>`
+				}*/
+				//Forma  moderna
+				const strong = dynamicValues[index] ? `<strong>${dynamicValues[index]}</strong>` : ``
+				//newContent = newContent + string + strong
+				//forma mas simple
+				newContent += `${string} ${strong}`
+			})
+			return `<p>${newContent}</p>`
+		}
+		const msg = taggedTemplate`El ${'trabajo duro'} super al ${'talento natural'}`
+		document.body.innerHTML = msg
+	</script>
+</body>
+
+</html>

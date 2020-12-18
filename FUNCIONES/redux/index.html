@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redux
+  </title>
+</head>
+
+<body>
+
+  <script>
+    //primero se tiene el estado actuales
+    // segundo se suscribe
+    // se puede ejecutan el dispatch
+    const createStore = (reducer, initialState) => {
+      let state = initialState
+      let updater = () => { }
+      //minimalists arrow func
+      const getState = () => state
+
+      //dispatch modifica el estado
+      // este receive una acción
+      const dispatch = (action) => {
+        //se manda al reduce para interpretar la acción
+        state = reducer(state, action)
+        updater()
+      }
+
+      const subscribe = (listener) => {
+        //escucha cuando algo cambia
+        updater = listener
+        //después se dice del cambio al dispatch
+      }
+      return {
+        getState,
+        dispatch,
+        subscribe
+      }
+    }
+
+    //Reducer evaluá los comportamientos de mis acciones
+    const reducer = (state, action) => {
+
+      return action
+    }
+
+    const store = createStore(reducer, 'estado inicial de la app');
+    //Funciones dentro del createStore
+    //store.dispatch()
+    //store.getState()
+    //store.subscribe()
+
+    //subscribe ejecuta una función cada ves que hay un cambio
+    store.subscribe(() => {
+      console.log('ha cambiado algo en el store |||', store.getState())
+    })
+    store.dispatch('voy a cambiar algo')
+
+
+  </script>
+</body>
+
+</html>
