@@ -1,3 +1,8 @@
+export function renderMovieListFromMap(list, map) {
+  cleanMovieList();
+  list.forEach((movieId) => renderElement(map.get(movieId)));
+}
+
 //render elementos
 function renderElement(movie) {
   //crear elemento de HTML
@@ -31,7 +36,7 @@ export default function renderMovieList(list) {
   //primer limpiar si existe algo antes
   cleanMovieList();
   // console.table(list);
-  //de esta manera solo se muestran los campos requeridos
+  // de esta manera solo se muestran los campos requeridos
   // console.table(list, ["title", "backdrop_path", "id"]);
   list.forEach(renderElement);
 }
