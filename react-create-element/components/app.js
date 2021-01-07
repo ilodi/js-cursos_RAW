@@ -1,25 +1,22 @@
-import { Component } from "../lib/react.js";
-import User from "./user.js";
-import UserStyled from "./user-styled.js";
-import Wrapper from "./wrapper.js";
+import { Component, createElement } from "../lib/react/index.js";
 
+const element = createElement(
+  "h1",
+  {
+    class: "title",
+  },
+  "Hola mundo desde create element!"
+);
+console.log(element);
 class App extends Component {
   render() {
-    return `
-    <div class="app">
-    ${new Wrapper({
-      children: `
-      <h1>
-      React js
-      </h1>
-        ${new UserStyled({
-          name: "Ash",
-          avatar: "./images/ash.jpg",
-        }).render()}
-      `,
-    }).render()}
-    </div>
-    `;
+    return createElement(
+      "div",
+      {
+        class: "app",
+      },
+      "Esta es la app!"
+    );
   }
 }
 

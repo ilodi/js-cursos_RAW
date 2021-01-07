@@ -1,4 +1,4 @@
-import { Component } from "../lib/react.js";
+import { Component } from "../lib/react/src/react.js";
 import styled from "../lib/styled.js";
 
 const UserStyled = styled.div`
