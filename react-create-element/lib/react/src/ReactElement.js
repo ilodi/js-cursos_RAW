@@ -37,9 +37,10 @@ export function createElement(type, props, content) {
   //Creas un array con las keys del objeto para ser iterable
   // console.log(Object.keys(props));
   //las propiedades
-  Object.keys(props).forEach((prop) => {
-    setProperties(prop, props[prop], element);
-  });
-
+  if (props) {
+    Object.keys(props).forEach((prop) => {
+      setProperties(prop, props[prop], element);
+    });
+  }
   return element;
 }
