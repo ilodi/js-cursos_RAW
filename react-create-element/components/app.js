@@ -14,6 +14,7 @@ class App extends Component {
       "div",
       {
         class: "app",
+        children: [createElement("h1", {}, "hola")],
       },
       "Esta es la app!"
     );

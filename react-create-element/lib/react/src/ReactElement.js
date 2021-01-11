@@ -1,9 +1,19 @@
-import { render } from "../../react-dom";
+import { render } from "../../react-dom.js";
+
+function renderChildren(children, container) {
+  //si es un array
+  if (Array.isArray(children)) {
+    return children.forEach((child) => {
+      render(child, container);
+    });
+  }
+  return render(children, container);
+}
 
 function setProperties(prop, value, element) {
   //validar para soportar children
   if (prop === "children") {
-    renderChildren();
+    return renderChildren(value, element);
   }
 
   //Support for attributes
