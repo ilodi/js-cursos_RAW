@@ -10,7 +10,23 @@ function renderChildren(children, container) {
   return render(children, container);
 }
 
+//las funciones que desencadenan eventos son callback
+function setEvents(element, event, callback) {
+  return element.addEventListener(event, callback);
+}
+
 function setProperties(prop, value, element) {
+  //event support
+  //startsWith si arranca el strings con ()
+  if (prop.startsWith("on")) {
+    //busca primero que quiero cambiar y segundo porque lo quiero cambiar
+    const event = prop.replace("on", "").toLowerCase();
+    //primer a que elemento
+    //que evento se va a enviar,
+    //el valor de esto
+    return setEvents(element, event, value);
+  }
+
   //validar para soportar children
   if (prop === "children") {
     return renderChildren(value, element);

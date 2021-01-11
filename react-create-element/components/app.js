@@ -4,21 +4,20 @@ import Wrapper from "./wrapper.js";
 import User from "./user.js";
 class App extends Component {
   render() {
-    return createElement(
-      "div",
-      {
-        class: "app",
-        children: new Wrapper({
-          children: [
-            new User({
-              name: "ash",
-              avatar: "./images/ash.jpg",
-            }),
-          ],
-        }),
+    return createElement("div", {
+      onClick: function () {
+        console.log("hola mundo");
       },
-      "Esta es la app!"
-    );
+      class: "app",
+      children: new Wrapper({
+        children: [
+          new User({
+            name: "ash",
+            avatar: "./images/ash.jpg",
+          }),
+        ],
+      }),
+    });
   }
 }
 
