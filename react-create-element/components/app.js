@@ -5,15 +5,13 @@ import User from "./user.js";
 class App extends Component {
   render() {
     return createElement("div", {
-      onClick: function () {
-        console.log("hola mundo");
-      },
       class: "app",
       children: new Wrapper({
         children: [
           new User({
             name: "ash",
             avatar: "./images/ash.jpg",
+            age: 10,
           }),
         ],
       }),
