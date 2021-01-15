@@ -11,9 +11,11 @@ function render(element, container) {
 
   element.update = reRender;
 
-  let childElement = element.render();
+  let childElement = element.build();
   //append agrega elemento al final del elemento al cual se le acciona
   container.append(childElement);
+  //aquí comienza el ciclo de vida
+  element.componentDidMount()
 }
 
 export { render };

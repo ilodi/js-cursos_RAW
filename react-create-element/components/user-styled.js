@@ -1,3 +1,4 @@
+import { createElement } from "../lib/react/index.js";
 import { Component } from "../lib/react/src/react.js";
 import styled from "../lib/styled.js";
 
@@ -28,17 +29,57 @@ const AvatarStyled = styled.img`
   box-shadow: 0 0 2px black;
 `;
 
+const theme = {
+  light: {
+    primaryColor: "#f9f9f9",
+    secondaryColor: "white",
+    tertiaryColor: "rgba(0,0,0,.15)",
+    fontColor: "black",
+  },
+  dark: {
+    primaryColor: "#212429",
+    secondaryColor: "#212429",
+    tertiaryColor: "white",
+    fontColor: "white",
+  },
+};
+
 class User extends Component {
+  state = {
+    mode: "light",
+  };
+  setMode = (event) => {
+    if (event.matches) {
+      return this.setState({
+        mode: "dark",
+      });
+    }
+    this.setState({
+      mode: "light",
+    });
+  };
+  componentDidMount() {
+    //método para media query con js
+    //con esto sabemos en que modo estas las preferencias
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    this.setMode(mediaQuery);
+    mediaQuery.addEventListener("change", this.setMode);
+  }
   render() {
     const { name, avatar } = this.props;
-    return `
-      ${UserStyled(`
-        ${AvatarStyled(`
-        src=${avatar}
-        `)}
-        <h2>${name}</h2>
-      `)}
-    `;
+    const { mode } = this.state;
+    const colors = mode === "light" ? theme.light : theme.dark;
+    return UserStyled(
+      {
+        children: [
+          AvatarStyled({
+            src: avatar,
+          }),
+          createElement("h2", null, name),
+        ],
+      },
+      ""
+    );
   }
 }
 

@@ -7,10 +7,25 @@ class Component {
     this.props = props;
     this.state = state;
   }
+  //se llama antes de que se renderice el componente
+  componentWillMount() {
+
+  }
+  //Ya esta montado en el navegador
+  componentDidMount() {
+
+  }
+  //cuando el componente se actualizo
+  componentDidUpdate() {
+
+  }
+
   //crear campo privado con un #
   update() {}
   #updater() {
     this.update(this.render());
+    //te voy a avisar que se actualizo
+    this.componentDidUpdate()
   }
   setState(newState) {
     this.state = {
@@ -20,6 +35,11 @@ class Component {
     };
     //método privado
     this.#updater();
+  }
+  //va a armar antes de montar el componente
+  build(){
+    this.componentWillMount()
+    return this.render()
   }
 }
 

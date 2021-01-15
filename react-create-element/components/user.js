@@ -18,11 +18,24 @@ class User extends Component {
   //   }
   ////////////////
   /////Por arrow
+  displayName= 'User'
   state = {
     age: this.props.age,
   };
+
+  componentDidMount() {
+    console.log(`el componente ${this.displayName}`);
+  }
+
+  componentWillMount() {
+    console.log(`el componente  ${this.displayName} se va a renderizar`);
+  }
+
+  componentDidUpdate(){
+    console.log(`El componente  ${this.displayName} actualizó`)
+  }
+
   handleClick = (event) => {
-    console.log(this.state.age);
     //mandar las cosas que quieres remplazar del objeto
     this.setState({
       age: this.state.age + 1,
