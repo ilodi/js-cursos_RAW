@@ -5,13 +5,14 @@ import styled from "../lib/styled.js";
 const UserStyled = styled.div`
   background-image: linear-gradient(
     to bottom,
-    #f9f9f9 0%,
-    #f9f9f9 130px,
-    rgba(0, 0, 0, 0.15) 130px,
-    rgba(0, 0, 0, 0.15) 131px,
-    white 131px,
-    white 100%
+    ${(props) => props.primaryColor} 0%,
+    ${(props) => props.primaryColor} 130px,
+    ${(props) => props.tertiaryColor} 130px,
+    ${(props) => props.tertiaryColor} 131px,
+    ${(props) => props.secondaryColor} 131px,
+    ${(props) => props.secondaryColor} 100%
   );
+  color: ${({ fontColor }) => fontColor};
   text-align: center;
   overflow: hidden;
   padding: 20px;
@@ -71,6 +72,7 @@ class User extends Component {
     const colors = mode === "light" ? theme.light : theme.dark;
     return UserStyled(
       {
+        ...colors,
         children: [
           AvatarStyled({
             src: avatar,
